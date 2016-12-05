@@ -1,0 +1,54 @@
+{%- extends "layout-cn.html" -%}
+
+{%- block htmltitle %}
+  {%- if not embedded and docstitle %}
+    {%- set titlesuffix = " &mdash; "|safe + docstitle|e + " " + version|e %}
+  {%- else %}
+    {%- set titlesuffix = "" %}
+  {%- endif -%}
+
+  <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
+{%- endblock -%}
+
+{%- block metadescription %}
+  <meta name="description" content="MongoDB Manual {{version}} {{title|striptags|e}}"/>
+{%- endblock -%}
+
+{%- block canonicalref %}
+  {%- if theme_branch == 'master' %}
+    {%- if pagename == 'index' %}
+      <link rel="canonical" href="http://docs.mongodb.com/{{theme_project}}/" />
+    {%- else %}
+      <link rel="canonical" href="http://docs.mongodb.com/{{theme_project}}/{{pagename}}" />
+    {%- endif -%}
+  {%- endif -%}
+{%- endblock -%}
+
+{%- block alertbar -%}
+    {%- if theme_active_branches and version not in theme_active_branches %}
+        <div class="alert alert-info">
+           <span class="alert-message">This version of the manual is no longer supported.</span>
+        </div>
+    {%- endif %}
+{%- endblock -%}
+
+{%- block righttoc %} {% endblock %}
+{%- block adblockheader %}
+    {%- include "adblock-header.html" %}
+{%- endblock -%}
+
+{%- block adblock %}
+    {%- include "adblock.html" %}
+{%- endblock -%}
+
+{%- block pdflink %}{%- endblock %}
+
+{%- block subnav %}
+   <a href="http://mongoing.com">中文社区首页</a>
+   <a href="http://mongoing.com/archives/category/blog">博客</a>
+   <a href="http://mongoing.com/anspress">讨论区</a>
+
+   <a href="http://www.mongodb.com">English Site</a>
+   <a href="http://www.mongodb.com/downloads">Downloads</a>
+   <a href="http://blog.mongodb.com">Blog</a>
+{% endblock %}

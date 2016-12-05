@@ -12,18 +12,14 @@ RUN pip install Flask==0.10.1
 RUN pip install ipaddress==1.0.6
 RUN pip install requests==2.2.1
 
-RUN git clone http://github.com/mongodb-china/docs.git /opt/docs
+RUN mkdir -p /opt/docs
 RUN git clone http://github.com/mongodb-china/docs-addon.git /opt/docs-addon
-
-
-# create symbol link for web
-RUN mkdir -p /opt/docs/build/master/html-zh
-RUN ln -sf /opt/docs/build/master/html-zh /var/www/html/manual-zh
 
 WORKDIR /opt/docs
 
 ADD etc/sitecustomize.py /etc/python2.7/sitecustomize.py
 ADD etc/setup.sh /opt/setup.sh
+ADD manual-cn /opt
 
 # init script to run
 ENTRYPOINT ["/bin/sh", "/opt/setup.sh"]
