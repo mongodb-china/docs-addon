@@ -12,9 +12,6 @@ RUN pip install Flask==0.10.1
 RUN pip install ipaddress==1.0.6
 RUN pip install requests==2.2.1
 
-# create symbol link for web
-RUN mkdir -p /opt/docs/build/master/html-zh
-RUN ln -s /opt/docs/build/master/html-zh /var/www/html/manual-zh
 
 WORKDIR /opt/docs
 
@@ -22,8 +19,7 @@ ADD etc/sitecustomize.py /etc/python2.7/sitecustomize.py
 ADD etc/setup.sh /opt/setup.sh
 
 # init script to run
-ENTRYPOINT ["/opt/setup.sh"]
-CMD ["/bin/bash"]
+ENTRYPOINT ["/bin/sh", "/opt/setup.sh"]
 
 
 # ENV TESTENV TESTVAL
