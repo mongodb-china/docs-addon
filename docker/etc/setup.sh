@@ -12,6 +12,8 @@ else
 	git clone http://github.com/mongodb/docs-tools.git /opt/docs/build/docs-tool
 fi
 
+# workaround for download error with objects.inv 
+cp /opt/objects.inv /opt/docs/build
 
 cd /opt/docs-addon
 git pull origin master
