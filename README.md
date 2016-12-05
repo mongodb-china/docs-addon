@@ -9,8 +9,8 @@ Docker installed
 
 	cd ~
 	git clone http://github.com/mongodb-china/docs
-	sudo docker run -it -v ~/docs:/opt/mongo-docs tjworks/mongo-docs
-	# sudo docker run -it -v ~/docs:/opt/mongo-docs tjworks/mongodb-chinese-docs	
+	sudo docker run -d -v ~/docs:/opt/docs -p 80:80 -p 8080:8080 tjworks/mongodb-chinese-docs
+	
 
 
 
