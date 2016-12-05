@@ -8,23 +8,22 @@ else
 	#empty	
 	echo "### Cloning docs repo"
 	git clone http://github.com/mongodb-china/docs.git /opt/docs
-	#mkdir -p /opt/docs/build
-	#git clone http://github.com/mongodb/docs-tools.git /opt/docs/build/docs-tools
+	mkdir -p /opt/docs/build
+
+	git clone http://github.com/mongodb/docs-tools.git /opt/docs-tools
+	ln -sf /opt/docs-tools /opt/docs/build/docs-tools
 fi
 
 # workaround for download error with objects.inv 
-#cp /opt/objects.inv /opt/docs/build
+cp /opt/invs-workaround/*.inv /opt/docs/build/
 
 cd /opt/docs-addon
 git pull origin master
 
 
 # create shortcut for manual file 
-#mkdir -p /opt/docs/build/master/html-zh
-#ln -sf /opt/docs/build/master/html-zh /var/www/html/manual-zh
-
-# link the chinese theme
-#ln -sf /opt/manual-cn /opt/docs/build/docs-tool/themes/manual-cn 
+mkdir -p /opt/docs/build/master/html-zh
+ln -sf /opt/docs/build/master/html-zh /var/www/html/manual-zh
 
 # user manual-cn theme
 sed -i "s/name: 'manual'/name: 'manual-cn'/"  /opt/docs/config/sphinx_local.yaml  
