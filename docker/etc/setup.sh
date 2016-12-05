@@ -5,9 +5,9 @@ if [ -d "/opt/docs/.git" ]; then
 	cd /opt/docs 
 	git pull origin master
 else
-	#empty
-	mkdir -p /opt/docs/build
+	#empty	
 	git clone http://github.com/mongodb-china/docs.git /opt/docs
+	mkdir -p /opt/docs/build
 	git clone http://github.com/mongodb/docs-tools.git /opt/docs/build/docs-tool
 fi
 
