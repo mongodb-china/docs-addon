@@ -1,0 +1,11 @@
+{
+    "mongodb-china/docs": {
+        "path": "/opt/docs", 
+	"action": [ ["git", "pull", "origin", "master"], ["echo", "pull completed!"], 
+			["/opt/docs-addon/scripts/checkpo"],
+			["/opt/docs-addon/scripts/stats.py"],
+			["make" , "html-zh"],
+			["/opt/docs-addon/scripts/stats.py"]
+		   ]
+    }
+}

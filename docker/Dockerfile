@@ -1,26 +1,35 @@
 FROM     ubuntu:14.04
 MAINTAINER TJ Tang "jianfa.tang@mognodb.com"
 
-
-RUN apt-get update 
-RUN apt-get install -y git curl python
-RUN apt-get install -y python-sphinx python-yaml python-argparse inkscape python-pip 
+# Install dependency packages
+RUN apt-get update
+RUN apt-get install -y git inkscape python-pip apache2
 RUN pip install giza
-RUN apt-get install -y python droopy fabric
+RUN pip install --upgrade six
 
-RUN mkdir -p /opt/mongo-docs
-WORKDIR /opt/mongo-docs
+# used by github-webhook
+RUN pip install Flask==0.10.1
+RUN pip install ipaddress==1.0.6
+RUN pip install requests==2.2.1
 
-ENV TESTENV TESTVAL
+# create symbol link for web
+RUN mkdir -p /opt/docs/build/master/html-zh
+RUN ln -s /opt/docs/build/master/html-zh /var/www/html/manual-zh
+
+WORKDIR /opt/docs
+
 ADD etc/sitecustomize.py /etc/python2.7/sitecustomize.py
 ADD etc/setup.sh /opt/setup.sh
 
+# init script to run
+ENTRYPOINT ["/opt/setup.sh"]
 CMD ["/bin/bash"]
-#ENTRYPOINT ["/bin/bash"]
 
+
+# ENV TESTENV TESTVAL
 
 ##### Build ####
-#  docker build --rm=true -t tjworks/mongo-docs .
+#  docker build --rm=true -t tjworks/mongodb-chinese-docs .
 
 #####  Local test run ###
 # docker run -i -v /home/docker/osx/docs:/opt/mongo-docs -t tjworks/mongo-docs 
