@@ -9,7 +9,7 @@ else
 	echo "### Cloning docs repo"
 	git clone http://github.com/mongodb-china/docs.git /opt/docs
 	mkdir -p /opt/docs/build
-	git clone http://github.com/mongodb/docs-tools.git /opt/docs/build/docs-tool
+	git clone http://github.com/mongodb/docs-tools.git /opt/docs/build/docs-tools
 fi
 
 # workaround for download error with objects.inv 
