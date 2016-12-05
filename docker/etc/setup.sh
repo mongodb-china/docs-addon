@@ -11,12 +11,17 @@ else
 	git clone http://github.com/mongodb/docs-tools.git /opt/docs/build/docs-tool
 fi
 
+
 cd /opt/docs-addon
 git pull origin master
+
 
 # create shortcut for manual file 
 mkdir -p /opt/docs/build/master/html-zh
 ln -sf /opt/docs/build/master/html-zh /var/www/html/manual-zh
+
+# link the chinese theme
+ln -sf /opt/manual-cn /opt/docs/build/docs-tool/themes/manual-cn 
 
 # user manual-cn theme
 sed -i "s/name: 'manual'/name: 'manual-cn'/"  /opt/docs/config/sphinx_local.yaml  

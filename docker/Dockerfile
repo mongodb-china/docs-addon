@@ -19,7 +19,7 @@ WORKDIR /opt/docs
 
 ADD etc/sitecustomize.py /etc/python2.7/sitecustomize.py
 ADD etc/setup.sh /opt/setup.sh
-ADD manual-cn /opt
+ADD etc/manual-cn /opt
 
 # init script to run
 ENTRYPOINT ["/bin/sh", "/opt/setup.sh"]
