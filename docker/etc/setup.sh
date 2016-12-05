@@ -10,7 +10,7 @@ else
 	git clone http://github.com/mongodb-china/docs.git /opt/docs
 	mkdir -p /opt/docs/build
 
-	git clone http://github.com/mongodb/docs-tools.git /opt/docs-tools
+	git clone http://github.com/mongodb-china/docs-tools.git /opt/docs-tools
 	ln -sf /opt/docs-tools /opt/docs/build/docs-tools
 fi
 
