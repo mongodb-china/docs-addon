@@ -6,6 +6,7 @@ if [ -d "/opt/docs/.git" ]; then
 	git pull origin master
 else
 	#empty	
+	echo "### Cloning docs repo"
 	git clone http://github.com/mongodb-china/docs.git /opt/docs
 	mkdir -p /opt/docs/build
 	git clone http://github.com/mongodb/docs-tools.git /opt/docs/build/docs-tool
@@ -26,11 +27,14 @@ ln -sf /opt/manual-cn /opt/docs/build/docs-tool/themes/manual-cn
 # user manual-cn theme
 sed -i "s/name: 'manual'/name: 'manual-cn'/"  /opt/docs/config/sphinx_local.yaml  
 
+# restart apache
+/etc/init.d/apache2 restart
+
 # start direct push script
 echo "Starting direct push script 8080"
 echo "TBD"
 
 # start github-webhook
-echo "Stating github-webhook 8001"
+echo "Stating github-webhook 8080"
 cd /opt/docs-addon/github-hook
 python index.py 8080 

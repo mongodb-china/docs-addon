@@ -10,7 +10,7 @@ RUN pip install --upgrade six
 # used by github-webhook
 RUN pip install Flask==0.10.1
 RUN pip install ipaddress==1.0.6
-RUN pip install requests==2.2.1
+RUN pip install requests==2.6.0
 
 RUN mkdir -p /opt/docs
 RUN git clone http://github.com/mongodb-china/docs-addon.git /opt/docs-addon
@@ -19,7 +19,7 @@ WORKDIR /opt/docs
 
 ADD etc/sitecustomize.py /etc/python2.7/sitecustomize.py
 ADD etc/setup.sh /opt/setup.sh
-ADD etc/manual-cn /opt
+ADD etc/manual-cn /opt/manual-cn/
 
 # init script to run
 ENTRYPOINT ["/bin/sh", "/opt/setup.sh"]
