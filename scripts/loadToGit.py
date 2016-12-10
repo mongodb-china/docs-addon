@@ -15,10 +15,11 @@ class MyHttpHandler(BaseHTTPRequestHandler):
             #name=params["name"][0] if "name" in params else None     
             name = self.queryString.split('=')[1]
         
-        url = "https://github.com/tjworks/docs/issues/"
-        if name in slugs:
-            issue_num = 716 + slugs.index(name)
-            url = url + str(issue_num)
+        #url = "https://github.com/tjworks/docs/issues/"
+        #if name in slugs:
+            #issue_num = 716 + slugs.index(name)
+            #url = url + str(issue_num)
+        url = "https://github.com/mongodb-china/docs/blob/master/locale/zh/LC_MESSAGES/" + name + ".po"
         self.send_response(301)
         self.send_header("Location", url)
 
