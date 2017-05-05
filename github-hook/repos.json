@@ -4,7 +4,7 @@
 	"action": [ ["git", "pull", "origin", "master"], ["echo", "pull completed!"], 
 			["/opt/docs-addon/scripts/checkpo"],
 			["/opt/docs-addon/scripts/stats.py"],
-			["make" , "html-zh"],
+			["giza", "make" , "html-zh"],
 			["/opt/docs-addon/scripts/stats.py"]
 		   ]
     }
