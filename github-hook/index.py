@@ -22,7 +22,9 @@ module.
     os.environ['USE_PROXYFIX'] = 'true'
     import flask-github-webhook-handler.index as handler
 
+
 """
+
 if os.environ.get('USE_PROXYFIX', None) == 'true':
     from werkzeug.contrib.fixers import ProxyFix
 
@@ -31,14 +33,16 @@ app.debug = os.environ.get('DEBUG') == 'true'
 
 # The repos.json file should be readable by the user running the Flask app,
 # and the absolute path should be given by this environment variable.
-REPOS_JSON_PATH = os.environ.get('REPOS_JSON_PATH', "./repos.json")
-
+#REPOS_JSON_PATH = os.environ.get('REPOS_JSON_PATH', "./repos.json")
+#REPOS_JSON_PATH = "/home/ubuntu/docs/docs-addon/github-hook/repos.json"
+REPOS_JSON_PATH = os.path.split(os.path.realpath(__file__))[0]+"/repos.json"
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    if request.method == 'GET':
+   print REPOS_JSON_PATH 
+   if request.method == 'GET':
         return 'OK'
-    elif request.method == 'POST':
+   elif request.method == 'POST':
         # Store the IP address of the requester
         request_ip = ipaddress.ip_address(u'{0}'.format(request.remote_addr))
 
@@ -57,19 +61,21 @@ def index():
         else:
             abort(403)
 
+
         if request.headers.get('X-GitHub-Event') == "ping":
             return json.dumps({'msg': 'Hi!'})
         if request.headers.get('X-GitHub-Event') != "push":
             return json.dumps({'msg': "wrong event type"})
-
+        
         repos = json.loads(io.open(REPOS_JSON_PATH, 'r').read())
+        
 
         payload = json.loads(request.data)
+        
         repo_meta = {
             'name': payload['repository']['name'],
             'owner': payload['repository']['owner']['name'],
         }
-
         # Try to match on branch as configured in repos.json
         match = re.match(r"refs/heads/(?P<branch>.*)", payload['ref'])
         if match:
@@ -92,7 +98,6 @@ def index():
                 mac = hmac.new(key, msg=request.data, digestmod=sha1)
                 if not compare_digest(mac.hexdigest(), signature):
                     abort(403)
-
         if repo.get('action', None):
             for action in repo['action']:
                 subp = subprocess.Popen(action, cwd=repo.get('path', '.'))
